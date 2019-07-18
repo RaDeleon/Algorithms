@@ -3,12 +3,19 @@
 import argparse
 
 def find_max_profit(prices):
-  max_profit = 0
-  for i in range(len(prices) - 1):
-        for j in range(i+1, len(prices)):
-              print(i,j,prices[i],prices[j])
-              if prices[j] > max_profit:
-                max_profit = prices[j] - prices[i]
+   # buy first day and set as initial buy
+  buy = prices[0]
+  # default to 0
+  sell = 0
+
+  for price in prices[1:]:
+        if price < buy and sell < price:
+              buy = price
+
+        if buy < price and price > sell:
+              sell = price
+
+  max_profit = sell - buy
   return max_profit
 
 
